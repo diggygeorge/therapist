@@ -1,0 +1,16 @@
+div {
+    text-align: center;
+    font-size: 30px;
+    padding: 10px
+}
+
+#stats {
+    margin-left: 800px;
+    margin-right: 800px;
+}
+
+button {
+    height: 50px;
+    width: 200px;
+    font-size: 40px;
+}
