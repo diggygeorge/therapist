@@ -1,1 +1,1 @@
-Hello!  Just download the file and open up index.html!  When you enter a sentence, the model should output the emotion it detects from that sentence, along with a respective quote fitting the emotion (like a therapist!)
+Download the file and open up index.html!  When you enter a sentence, the model should output the emotion it detects from that sentence, along with a respective quote fitting the emotion (like a therapist!)
