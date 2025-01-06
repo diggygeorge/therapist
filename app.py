@@ -3,7 +3,83 @@ from flask_cors import CORS
 import tensorflow as tf
 from tensorflow import keras
 import numpy as np
+import random
 from tensorflow.keras.models import load_model
+
+quotes = {
+        0: [
+            "Even the darkest night will end and the sun will rise.",
+            "Tears are words the heart can't express.",
+            "The soul would have no rainbow if the eyes had no tears.",
+            "Crying is how your heart speaks when your lips can’t explain the pain.",
+            "This too shall pass.",
+            "Keep your face to the sunshine, and you cannot see the shadow.",
+            "Sadness flies away on the wings of time.",
+            "Courage does not always roar. Sometimes it is the quiet voice.",
+            "Sadness is but a wall between two gardens.",
+            "Stars can’t shine without darkness."
+        ],
+        1: [
+            "Happiness is not by chance, but by choice.",
+            "Keep your face always toward the sunshine.",
+            "The purpose of life is to enjoy every moment.",
+            "Joy is the simplest form of gratitude.",
+            "Smiles are free, but they are worth a lot.",
+            "Let your joy be unconfined.",
+            "The only joy in the world is to begin.",
+            "Where there is love, there is joy.",
+            "A joyful heart is the inevitable result of a heart burning with love.",
+            "Choose to be happy."
+        ],
+        2: [
+            "Love is the beauty of the soul.",
+            "Love is composed of a single soul inhabiting two bodies.",
+            "Where there is love there is life.",
+            "Love is not about possession. Love is about appreciation.",
+            "To love and be loved is to feel the sun from both sides.",
+            "Love is a canvas furnished by nature and embroidered by imagination.",
+            "Being deeply loved by someone gives you strength.",
+            "Love recognizes no barriers.",
+            "The best thing to hold onto in life is each other.",
+            "Love is an endless act of forgiveness."
+        ],
+        3: [
+            "Anger is one letter short of danger.",
+            "For every minute you are angry you lose sixty seconds of happiness.",
+            "Anger doesn’t solve anything. It builds nothing, but it can destroy everything.",
+            "He who angers you conquers you.",
+            "Holding onto anger is like drinking poison.",
+            "Never respond to an angry person with a fiery comeback.",
+            "Speak when you are angry and you will make the best speech you will ever regret.",
+            "Anger is like a storm rising up from the bottom of your consciousness.",
+            "When anger rises, think of the consequences.",
+            "Anger is a wind which blows out the lamp of the mind."
+        ],
+        4: [
+            "Do one thing every day that scares you.",
+            "Courage is resistance to fear, mastery of fear, not absence of fear.",
+            "Fear is only as deep as the mind allows.",
+            "Fear defeats more people than any other one thing in the world.",
+            "Fear can keep you up all night, but faith makes one fine pillow.",
+            "The only thing we have to fear is fear itself.",
+            "Courage is not the absence of fear, but the triumph over it.",
+            "Fears are nothing more than a state of mind.",
+            "Face your fears, don’t run away.",
+            "Fear is temporary. Regret is forever."
+        ],
+        5: [
+            "Life is full of surprises, some good, some not so good.",
+            "Surprise is the greatest gift which life can grant us.",
+            "Expect the unexpected.",
+            "Sometimes we’re taken off guard and realize how important something is.",
+            "The best things in life are unexpected.",
+            "Surprise is the mother of all joy.",
+            "Astonishment is the root of philosophy.",
+            "The art of life is to live in the present moment.",
+            "Be open to the unexpected.",
+            "Life is a surprise, enjoy the ride."
+        ]
+    }
 
 app = Flask(__name__)
 CORS(app)
@@ -20,18 +96,8 @@ def generate_quote(pred_text):
   pred_text = pred_text.astype(np.ndarray)
   outcome = emotion_model.predict(pred_text)
   emotion = np.argmax(outcome)
-  if emotion == 0:
-    return "Your predicted emotion is: sadness. - \"Sad hurts but it’s a healthy feeling.\" – J. K. Rowling"
-  elif emotion == 1:
-    return "Your predicted emotion is: joy. - \"Don't allow anyone to steal your joy.\" - Paulo Coelho"
-  elif emotion == 2:
-    return "Your predicted emotion is: love. - \"And now these three remain: faith, hope and love. But the greatest of these is love.\" - 1 Corinthians 13:13"
-  elif emotion == 3:
-    return "Your predicted emotion is: anger. - \"Holding on to anger is like grasping a hot coal with the intent of throwing it at someone else; you are the one who gets burned.\" - Buddha"
-  elif emotion == 4:
-    return "Your predicted emotion is: fear. - \"Fear is the brain’s way of saying there is something important for you to overcome.\" - Rachel Huber"
-  elif emotion == 5:
-    return "Your predicted emotion is: surprise. - \"The best part of the journey is the surprise and wonder along the way.\" - Ken Poirot"
+  if emotion in quotes:
+        return random.choice(quotes[emotion])
 
 @app.route('/process_input', methods=['POST'])
 def process_input():
