@@ -83,7 +83,7 @@ quotes = {
 
 app = Flask(__name__)
 CORS(app)
-emotion_model = load_model('emotion_model.keras')
+emotion_model = load_model('extracted_model/emotion_model.keras')
 
 def predict_message(pred_text):
   pred_text = np.array([pred_text])
