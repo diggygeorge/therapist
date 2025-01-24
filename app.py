@@ -121,16 +121,5 @@ def process_input():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
-    # Limit TensorFlow to use only necessary GPU memory if running on a GPU
-    gpus = tf.config.experimental.list_physical_devices('GPU')
-    if gpus:
-        try:
-            # Set a memory limit
-            tf.config.experimental.set_virtual_device_configuration(
-                gpus[0],
-                [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=512)])
-        except RuntimeError as e:
-            print(e)
+    app.run(debug=True, threaded=True)
 
