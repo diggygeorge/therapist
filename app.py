@@ -134,6 +134,3 @@ if __name__ == '__main__':
         except RuntimeError as e:
             print(e)
 
-        # Enable memory growth to avoid pre-allocating all GPU memory
-        tf.config.experimental.set_memory_growth(gpus[0], True)
-
