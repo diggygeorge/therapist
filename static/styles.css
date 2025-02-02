@@ -1,0 +1,19 @@
+div {
+    text-align: center;
+    font-size: 29px;
+    padding: 10px
+}
+
+div:first-of-type {
+    padding-top: 0px;
+}
+
+#stats {
+    margin: 0% 40% 0% 40%
+}
+
+button {
+    height: 50px;
+    width: 200px;
+    font-size: 40px;
+}

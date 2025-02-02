@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Therapist</title>
+</head>
+<body>
+    <div>
+        <h1>How are you feeling today?</h1>
+        <textarea id="userInput" placeholder="Type here..." rows="5" cols="50"></textarea>
+    </div>
+    <div>
+        <button id="submit">Submit</button>
+    </div>
+    <div>
+        <h2>Results:</h2>
+        <p id="stats"></p>
+        <p id="quote"></p>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $('#submit').click(function() {
+                // Get user input
+                const userInput = $('#userInput').val();
+
+                // Send AJAX request
+                $.ajax({
+                    type: 'POST',
+                    url: 'https://therapist-wne3aypvua-uk.a.run.app/process_input',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ input: userInput }),
+                    success: function(response) {
+                        // Display the results
+                        $('#stats').text(response.result_one);
+                        $('#quote').text(response.result_two);
+                    },
+                    error: function(err) {
+                        console.error('Error:', err);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

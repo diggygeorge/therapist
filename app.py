@@ -1,9 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS
 import tensorflow as tf
 from tensorflow import keras
 import numpy as np
 import random
+import os
 from tensorflow.keras.models import load_model
 
 quotes = {
@@ -81,9 +82,13 @@ quotes = {
         ]
     }
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder="templates", static_folder="static")
 CORS(app)
 emotion_model = load_model('extracted_model/emotion_model.keras')
+
+@app.route('/')
+def home():
+    return render_template('index.html')
 
 def predict_message(pred_text):
   pred_text = np.array([pred_text])
@@ -121,5 +126,5 @@ def process_input():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True, threaded=True)
+    app.run(debug=False, threaded=True, host='0.0.0.0', port=8080)
 
