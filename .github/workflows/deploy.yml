@@ -16,9 +16,9 @@ jobs:
         uses: google-github-actions/auth@v2
         with:
           credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
-
-      - name: Configure Docker
-        run: gcloud auth configure-docker gcr.io
+      
+      - name: Configure Docker for Artifact Registry
+        run: gcloud auth configure-docker us-east4-docker.pkg.dev
 
       - name: Build and Push Docker Image
         run: |
@@ -29,6 +29,6 @@ jobs:
         run: |
           gcloud run deploy therapist \
             --image gcr.io/calcium-field-448820-a9/therapist:$GITHUB_SHA \
-            --region us-central1 \
+            --region us-east4 \
             --platform managed \
             --allow-unauthenticated
