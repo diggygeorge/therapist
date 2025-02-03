@@ -18,7 +18,9 @@ jobs:
           credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
       
       - name: Configure Docker for Artifact Registry
-        run: gcloud auth configure-docker us-east4-docker.pkg.dev
+        run: |
+            gcloud auth configure-docker gcr.io
+            gcloud auth configure-docker us-east4-docker.pkg.dev
 
       - name: Build and Push Docker Image
         run: |
