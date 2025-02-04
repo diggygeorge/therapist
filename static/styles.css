@@ -9,7 +9,8 @@ div:first-of-type {
 }
 
 #stats {
-    margin: 0% 40% 0% 40%
+    margin: auto;
+    max-width: 250px;
 }
 
 button {
